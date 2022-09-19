@@ -20,14 +20,15 @@ class LinearCharts extends StatelessWidget {
       Expenses(4, 95),
       Expenses(5, 360),
       Expenses(6, 400),
-      Expenses(7, 50),
-      Expenses(8, 100),
-      Expenses(9, 150),
-      Expenses(10, 300),
-      Expenses(11, 250),
-      Expenses(12, 50),
-      Expenses(13, 100),
-      Expenses(14, 500),
+      Expenses(7, 400),
+      Expenses(8, 400),
+      Expenses(9, 200),
+      Expenses(10, 250),
+      Expenses(11, 3000),
+      Expenses(11, 30),
+      Expenses(12, 500),
+      Expenses(13, 400),
+      Expenses(14, 200),
     ];
 
     List<charts.Series<Expenses, int>> series = [

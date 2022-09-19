@@ -1,6 +1,8 @@
+import 'package:app_3/services/auth_services.dart';
 import 'package:app_3/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:app_3/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class StatisticPage extends StatefulWidget {
   @override
@@ -19,8 +21,18 @@ class _StatisticPageState extends State<StatisticPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                authService.logout();
+                Navigator.pushReplacementNamed(context, 'home');
+              },
+              icon: Icon(Icons.home_outlined))
+        ],
         backgroundColor: AppTheme.primary,
         centerTitle: true,
         title: Text('Estadísticas del mes'),
@@ -44,7 +56,9 @@ class _StatisticPageState extends State<StatisticPage> {
           Icons.add_circle,
           color: AppTheme.primary,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, 'entrenamientos');
+        },
       ),
       body: //_body(),
           LinearCharts(),

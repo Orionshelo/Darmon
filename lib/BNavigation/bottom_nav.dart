@@ -28,9 +28,12 @@ class _BNavigatorState extends State<BNavigator> {
       iconSize: 30,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
-        BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'Noticias'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.newspaper), label: 'Novedades'),
         BottomNavigationBarItem(
             icon: Icon(Icons.area_chart), label: 'Estadísticas'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.attachment_outlined), label: 'Asistencia'),
         BottomNavigationBarItem(
             icon: Icon(Icons.person_outline), label: 'Perfil'),
       ],

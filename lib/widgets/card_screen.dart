@@ -1,4 +1,6 @@
 import 'package:app_3/theme/app_theme.dart';
+import 'package:app_3/services/auth_services.dart';
+import 'package:provider/provider.dart';
 import 'package:app_3/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -7,8 +9,17 @@ class CardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                authService.logout();
+                Navigator.pushReplacementNamed(context, 'home');
+              },
+              icon: Icon(Icons.home_outlined))
+        ],
         backgroundColor: AppTheme.primary,
         title: const Text('Noticias del mundo del deporte'),
       ),
@@ -18,19 +29,20 @@ class CardScreen extends StatelessWidget {
             //CustomCardType1(),
             SizedBox(height: 10),
             CustomCardType2(
-              imageUrl: 'https://i.ytimg.com/vi/4uGXIb6kANg/maxresdefault.jpg',
+              imageUrl:
+                  'https://cdn-1.motorsport.com/images/amp/0rGgmyq2/s6/max-verstappen-red-bull-racing.jpg',
               name: 'La carrera de Max Verstappen: ¿Cómo llegó a la F1?',
             ),
             SizedBox(height: 20),
             CustomCardType2(
               imageUrl:
-                  'https://s3.amazonaws.com/rtvc-assets-qa-sistemasenalcolombia.gov.co/noticias/emisora-radio-nacional_1.jpg',
+                  'https://files.alerta.rcnradio.com/alerta_tolima_prod/public/2021-11/sin_titulo-1_0.jpg?dXUgrWd0Q1W.IrqxtqEsFYYYG79Wj9Tu',
               name: 'Fabiana Arias, la patinadora más veloz de Colombia',
             ),
             SizedBox(height: 20),
             CustomCardType2(
               imageUrl:
-                  'https://e00-co-marca.uecdn.es/claro/assets/multimedia/imagenes/2022/07/22/16585078895731.jpg',
+                  'https://imagenesnoticias.canalrcn.com/ImgNoticias/nairoquintanacontinuidadarkea.jpg?VersionId=1mFmfwD_2wfiMXbohh7m7s8U_4FwDbcl',
               name:
                   'Tour de Francia 2022: Nairo Quintana ya piensa en la crono',
             ),

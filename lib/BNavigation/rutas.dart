@@ -1,5 +1,6 @@
 import 'package:app_3/main.dart';
-import 'package:app_3/screens/login_screen.dart';
+import 'package:app_3/widgets/page3.dart';
+//import 'package:app_3/screens/login_screen.dart';
 import 'package:app_3/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +12,12 @@ class Routes extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> myList = [
       //LoginScreen(),
-      const Page1(),
+      HomeScreen(),
       const CardScreen(),
       //const Page2(),
-      StatisticPage(),
-      const Page4(),
+      DummyScreen(),
+      AsistenciaScreen(),
+      const ProfileScreen(),
       //const Page4()
     ];
     return myList[index];

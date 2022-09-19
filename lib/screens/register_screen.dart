@@ -1,4 +1,5 @@
-import 'package:app_3/services/auth_services.dart';
+//import 'dart:html';
+
 import 'package:app_3/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:app_3/providers/login_form_provider.dart';
@@ -7,7 +8,7 @@ import 'package:app_3/ui/input_decorations.dart';
 import 'package:app_3/widgets/widgets.dart';
 import 'package:app_3/theme/app_theme.dart';
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +21,8 @@ class LoginScreen extends StatelessWidget {
               child: Column(
             children: [
               SizedBox(height: 10),
-              Text('Login', style: Theme.of(context).textTheme.headline4),
+              Text('Crear cuenta',
+                  style: Theme.of(context).textTheme.headline4),
               SizedBox(height: 30),
               ChangeNotifierProvider(
                   create: (_) => LoginFormProvider(), child: _LoginForm())
@@ -33,10 +35,9 @@ class LoginScreen extends StatelessWidget {
                   MaterialStateProperty.all(AppTheme.primary.withOpacity(0.1)),
               shape: MaterialStateProperty.all(StadiumBorder()),
             ),
-            onPressed: () =>
-                Navigator.pushReplacementNamed(context, 'register'),
+            onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
             child: Text(
-              'Crear una nueva cuenta',
+              '¿Ya tienes una cuenta?',
               style: TextStyle(fontSize: 18, color: Colors.black87),
             ),
           ),
@@ -92,17 +93,36 @@ class _LoginForm extends StatelessWidget {
                     : 'La contraseña debe de ser de 6 caracteres';
               },
             ),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: DropdownButtonFormField(
+                  hint: Text(
+                    "Escoja su rol: ",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  items: <String>['Deportista', 'Administrador', 'Entrenador']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String) {}),
+            ),
             SizedBox(height: 30),
             MaterialButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 disabledColor: Colors.grey,
                 elevation: 0,
-                color: AppTheme.primary,
+                color: Colors.deepPurple,
                 child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
                     child: Text(
-                      loginForm.isLoading ? 'Espere' : 'Ingresar',
+                      loginForm.isLoading ? 'Espere' : 'Registrar',
                       style: TextStyle(color: Colors.white),
                     )),
                 onPressed: loginForm.isLoading
@@ -119,15 +139,15 @@ class _LoginForm extends StatelessWidget {
 
                         // TODO: validar si el login es correcto
 
-                        final String? errorMessage = await authService.login(
-                            loginForm.email, loginForm.password);
+                        final String? errorMessage =
+                            await authService.createUser(loginForm.email,
+                                loginForm.password, loginForm.roles);
 
                         if (errorMessage == null) {
                           Navigator.pushReplacementNamed(context, 'home');
                         } else {
                           // TODO: mostrar error en pantalla
-                          //print(errorMessage);
-                          NotificationsService.showSnackBar(errorMessage);
+                          print(errorMessage);
                         }
 
                         loginForm.isLoading = false;
